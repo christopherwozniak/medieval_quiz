@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Medieval History Quiz'),
+          backgroundColor: Colors.transparent,
         ),
+        backgroundColor: Colors.blue,
       ),
     );
   }
