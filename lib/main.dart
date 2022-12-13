@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medieval_quiz/home_page/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Medieval History Quiz'),
-          backgroundColor: Colors.transparent,
-        ),
-        backgroundColor: Colors.blue,
-      ),
+      home: const Home(),
     );
   }
 }
