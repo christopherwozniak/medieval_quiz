@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, unused_element
+
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -13,15 +15,155 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Medieval History Quiz'),
-        backgroundColor: Colors.transparent,
+        title: const Text(
+          'Medieval History Quiz',
+          style: TextStyle(color: Colors.amber),
+        ),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
       ),
-      backgroundColor: Colors.blue,
+      body: Center(
+        child: Column(
+          children: [
+            Row(
+              children: const [
+                Icon(Icons.check_circle, color: Colors.green),
+                Icon(Icons.clear, color: Colors.red),
+              ],
+            ),
+            Container(
+              width: double.infinity,
+              height: 130.0,
+              margin:
+                  const EdgeInsets.only(bottom: 10.0, left: 30.0, right: 30.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: const Center(
+                child: Text(
+                  'Our questions',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                padding: const EdgeInsets.all(15.0),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: const Text(
+                  'Answers',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                padding: const EdgeInsets.all(15.0),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: const Text(
+                  'Answers',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                padding: const EdgeInsets.all(15.0),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: const Text(
+                  'Answers',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                padding: const EdgeInsets.all(15.0),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: const Text(
+                  'Answers',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 60.0),
+              ),
+              onPressed: () {},
+              child: const Text('Next Question'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-final _questions = const [
+final _questions = [
   {
     'question': 'Kto był pierwszym królem Polski?',
     'answers': [
