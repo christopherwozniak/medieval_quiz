@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  @override
+  final List<Icon> _scoreTracker = [];
+  int _questioniIndex = 0;
+  int _totalScore = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +28,9 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Row(
-              children: const [
-                Icon(Icons.check_circle, color: Colors.green),
-                Icon(Icons.clear, color: Colors.red),
+              children: [
+                if (_scoreTracker.length == 0) const SizedBox(height: 25.0),
+                if (_scoreTracker.length > 0) ..._scoreTracker
               ],
             ),
             Container(
@@ -44,7 +46,7 @@ class _HomeState extends State<Home> {
               ),
               child: const Center(
                 child: Text(
-                  'Our questions',
+                  'This is my questions',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
@@ -156,6 +158,13 @@ class _HomeState extends State<Home> {
               onPressed: () {},
               child: const Text('Next Question'),
             ),
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: const Text(
+                '0/10',
+                style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+              ),
+            )
           ],
         ),
       ),

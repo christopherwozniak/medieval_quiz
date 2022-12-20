@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medieval_quiz/home_page/home_page.dart';
+import 'package:medieval_quiz/home/home.dart';
 
 void main() {
   runApp(const MyApp());
