@@ -1,17 +1,20 @@
 // ignore_for_file: library_private_types_in_public_api, unused_element
 
 import 'package:flutter/material.dart';
+import 'package:medieval_quiz/answer/answer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
+
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   final List<Icon> _scoreTracker = [];
-  int _questioniIndex = 0;
-  int _totalScore = 0;
+  final int _questioniIndex = 0;
+  final int _totalScore = 0;
+  bool answerWasSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +47,11 @@ class _HomeState extends State<Home> {
                 color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'This is my questions',
+                  _questions[_questioniIndex]['question'] as String,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -56,97 +59,14 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(15.0),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: const Text(
-                  'Answers',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(15.0),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: const Text(
-                  'Answers',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(15.0),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: const Text(
-                  'Answers',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(15.0),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: const Text(
-                  'Answers',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+            ...(_questions[_questioniIndex]['answers']
+                    as List<Map<String, Object>>)
+                .map(
+              (answer) => Answer(
+                  answerText: answer['answerText'].toString(),
+                  answerColor: answerWasSelected != answer['score']
+                      ? Colors.green
+                      : Colors.red),
             ),
             const SizedBox(
               height: 20.0,
@@ -210,3 +130,97 @@ final _questions = [
     ],
   },
 ];
+
+
+// InkWell(
+//               onTap: () {},
+//               child: Container(
+//                 padding: const EdgeInsets.all(15.0),
+//                 margin:
+//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(
+//                   color: Colors.blue,
+//                   border: Border.all(color: Colors.blue),
+//                   borderRadius: BorderRadius.circular(20.0),
+//                 ),
+//                 child: const Text(
+//                   'Answers',
+//                   textAlign: TextAlign.center,
+//                   style: TextStyle(
+//                     fontSize: 20.0,
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             InkWell(
+//               onTap: () {},
+//               child: Container(
+//                 padding: const EdgeInsets.all(15.0),
+//                 margin:
+//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(
+//                   color: Colors.blue,
+//                   border: Border.all(color: Colors.blue),
+//                   borderRadius: BorderRadius.circular(20.0),
+//                 ),
+//                 child: const Text(
+//                   'Answers',
+//                   textAlign: TextAlign.center,
+//                   style: TextStyle(
+//                     fontSize: 20.0,
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             InkWell(
+//               onTap: () {},
+//               child: Container(
+//                 padding: const EdgeInsets.all(15.0),
+//                 margin:
+//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(
+//                   color: Colors.blue,
+//                   border: Border.all(color: Colors.blue),
+//                   borderRadius: BorderRadius.circular(20.0),
+//                 ),
+//                 child: const Text(
+//                   'Answers',
+//                   textAlign: TextAlign.center,
+//                   style: TextStyle(
+//                     fontSize: 20.0,
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             InkWell(
+//               onTap: () {},
+//               child: Container(
+//                 padding: const EdgeInsets.all(15.0),
+//                 margin:
+//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(
+//                   color: Colors.blue,
+//                   border: Border.all(color: Colors.blue),
+//                   borderRadius: BorderRadius.circular(20.0),
+//                 ),
+//                 child: const Text(
+//                   'Answers',
+//                   textAlign: TextAlign.center,
+//                   style: TextStyle(
+//                     fontSize: 20.0,
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               ),
+//             ),
