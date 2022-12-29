@@ -176,7 +176,9 @@ class _HomeState extends State<Home> {
                     color: Colors.black,
                     child: Center(
                       child: Text(
-                        'HI',
+                        _totalScore > 2
+                            ? 'Congratulations! Your final score is: $_totalScore'
+                            : 'Your final score is: $_totalScore. Better luck next time!',
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
