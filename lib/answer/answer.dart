@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 class Answer extends StatelessWidget {
   final String answerText;
   const Answer(
-      {super.key, required this.answerText, required this.answerColor});
+      {super.key,
+      required this.answerText,
+      required this.answerColor,
+      required this.answerTap});
   final Color answerColor;
+  final VoidCallback answerTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: answerTap,
       child: Container(
         padding: const EdgeInsets.all(15.0),
         margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),

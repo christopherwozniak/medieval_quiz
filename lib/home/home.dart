@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, unused_element
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 import 'package:medieval_quiz/answer/answer.dart';
@@ -11,10 +11,52 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<Icon> _scoreTracker = [];
-  final int _questioniIndex = 0;
-  final int _totalScore = 0;
+  List<Icon> _scoreTracker = [];
+  int _questioniIndex = 0;
+  int _totalScore = 0;
   bool answerWasSelected = false;
+  bool endOfQuiz = false;
+
+  void _questionAnswered(bool answerScore) {
+    setState(() {
+      // answer was selected
+      answerWasSelected = true;
+      // check if answer was correct
+      if (answerScore) {
+        _totalScore++;
+      }
+      // adding to the score tracker on top
+      _scoreTracker.add(
+        answerScore
+            ? const Icon(Icons.check_circle, color: Colors.green)
+            : const Icon(Icons.clear, color: Colors.red),
+      );
+      //when the quiz ends
+      if (_questioniIndex + 1 == _questions.length) {
+        endOfQuiz = true;
+      }
+    });
+  }
+
+  void _nextQuestion() {
+    setState(() {
+      _questioniIndex++;
+      answerWasSelected = false;
+    });
+    //what happens at the end of the quiz
+    if (_questioniIndex >= _questions.length) {
+      _resetQuiz();
+    }
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _questioniIndex = 0;
+      _totalScore = 0;
+      _scoreTracker = [];
+      endOfQuiz = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +74,8 @@ class _HomeState extends State<Home> {
           children: [
             Row(
               children: [
-                if (_scoreTracker.length == 0) const SizedBox(height: 25.0),
-                if (_scoreTracker.length > 0) ..._scoreTracker
+                if (_scoreTracker.isEmpty) const SizedBox(height: 25.0),
+                if (_scoreTracker.isNotEmpty) ..._scoreTracker
               ],
             ),
             Container(
@@ -63,10 +105,15 @@ class _HomeState extends State<Home> {
                     as List<Map<String, Object>>)
                 .map(
               (answer) => Answer(
-                  answerText: answer['answerText'].toString(),
-                  answerColor: answerWasSelected != answer['score']
-                      ? Colors.green
-                      : Colors.red),
+                answerText: answer['answerText'].toString(),
+                answerColor: answerWasSelected == answer['score']
+                    ? Colors.green
+                    : Colors.red,
+                answerTap: () {
+                  //
+                  _questionAnswered(answer['score'] as bool);
+                },
+              ),
             ),
             const SizedBox(
               height: 20.0,
@@ -75,14 +122,17 @@ class _HomeState extends State<Home> {
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 60.0),
               ),
-              onPressed: () {},
-              child: const Text('Next Question'),
+              onPressed: () {
+                _nextQuestion();
+              },
+              child: Text(endOfQuiz ? 'Restart Quiz' : 'Next Question'),
             ),
             Container(
               padding: const EdgeInsets.all(20.0),
-              child: const Text(
-                '0/10',
-                style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+              child: Text(
+                '${_totalScore.toString()}/${_questions.length}',
+                style: const TextStyle(
+                    fontSize: 40.0, fontWeight: FontWeight.bold),
               ),
             )
           ],
