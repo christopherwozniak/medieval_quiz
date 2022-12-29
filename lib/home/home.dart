@@ -16,6 +16,7 @@ class _HomeState extends State<Home> {
   int _totalScore = 0;
   bool answerWasSelected = false;
   bool endOfQuiz = false;
+  bool correctAnswerSelected = false;
 
   void _questionAnswered(bool answerScore) {
     setState(() {
@@ -24,6 +25,7 @@ class _HomeState extends State<Home> {
       // check if answer was correct
       if (answerScore) {
         _totalScore++;
+        correctAnswerSelected = true;
       }
       // adding to the score tracker on top
       _scoreTracker.add(
@@ -42,6 +44,7 @@ class _HomeState extends State<Home> {
     setState(() {
       _questioniIndex++;
       answerWasSelected = false;
+      correctAnswerSelected = false;
     });
     //what happens at the end of the quiz
     if (_questioniIndex >= _questions.length) {
@@ -110,7 +113,11 @@ class _HomeState extends State<Home> {
                     ? Colors.green
                     : Colors.red,
                 answerTap: () {
-                  //
+                  // if answer was already selected then nothing happens onTap
+                  if (answerWasSelected) {
+                    return;
+                  }
+                  //answer is being selected
                   _questionAnswered(answer['score'] as bool);
                 },
               ),
@@ -123,6 +130,15 @@ class _HomeState extends State<Home> {
                 minimumSize: const Size(double.infinity, 60.0),
               ),
               onPressed: () {
+                if (!answerWasSelected) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                          'Please select the answer before you go to the next question'),
+                    ),
+                  );
+                  return;
+                }
                 _nextQuestion();
               },
               child: Text(endOfQuiz ? 'Restart Quiz' : 'Next Question'),
@@ -132,9 +148,41 @@ class _HomeState extends State<Home> {
               child: Text(
                 '${_totalScore.toString()}/${_questions.length}',
                 style: const TextStyle(
-                    fontSize: 40.0, fontWeight: FontWeight.bold),
+                    fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
-            )
+            ),
+            if (answerWasSelected && !endOfQuiz)
+              Container(
+                height: 50,
+                width: double.infinity,
+                color: correctAnswerSelected ? Colors.green : Colors.red,
+                child: Center(
+                  child: Text(
+                    correctAnswerSelected
+                        ? 'You got right, well done'
+                        : 'Wrong answer...',
+                    style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
+            if (endOfQuiz)
+              Container(
+                height: 100,
+                width: double.infinity,
+                color: Colors.black,
+                child: Center(
+                  child: Text(
+                    'HI',
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: _totalScore > 2 ? Colors.green : Colors.red),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
