@@ -64,129 +64,130 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Medieval History Quiz',
-          style: TextStyle(color: Colors.amber),
+        appBar: AppBar(
+          title: const Text(
+            'Medieval History Quiz',
+            style: TextStyle(color: Colors.amber),
+          ),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
         ),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Row(
+        body: ListView(children: [
+          Center(
+            child: Column(
               children: [
-                if (_scoreTracker.isEmpty) const SizedBox(height: 25.0),
-                if (_scoreTracker.isNotEmpty) ..._scoreTracker
+                Row(
+                  children: [
+                    if (_scoreTracker.isEmpty) const SizedBox(height: 25.0),
+                    if (_scoreTracker.isNotEmpty) ..._scoreTracker
+                  ],
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 130.0,
+                  margin: const EdgeInsets.only(
+                      bottom: 10.0, left: 30.0, right: 30.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 50.0, vertical: 20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Center(
+                    child: Text(
+                      _questions[_questioniIndex]['question'] as String,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                ...(_questions[_questioniIndex]['answers']
+                        as List<Map<String, Object>>)
+                    .map(
+                  (answer) => Answer(
+                    answerText: answer['answerText'].toString(),
+                    answerColor: answerWasSelected == answer['score']
+                        ? Colors.green
+                        : Colors.red,
+                    answerTap: () {
+                      // if answer was already selected then nothing happens onTap
+                      if (answerWasSelected) {
+                        return;
+                      }
+                      //answer is being selected
+                      _questionAnswered(answer['score'] as bool);
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 60.0),
+                  ),
+                  onPressed: () {
+                    if (!answerWasSelected) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                              'Please select the answer before you go to the next question'),
+                        ),
+                      );
+                      return;
+                    }
+                    _nextQuestion();
+                  },
+                  child: Text(endOfQuiz ? 'Restart Quiz' : 'Next Question'),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    '${_totalScore.toString()}/${_questions.length}',
+                    style: const TextStyle(
+                        fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                if (answerWasSelected && !endOfQuiz)
+                  Container(
+                    height: 50,
+                    width: double.infinity,
+                    color: correctAnswerSelected ? Colors.green : Colors.red,
+                    child: Center(
+                      child: Text(
+                        correctAnswerSelected
+                            ? 'You got right, well done'
+                            : 'Wrong answer...',
+                        style: const TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                if (endOfQuiz)
+                  Container(
+                    height: 100,
+                    width: double.infinity,
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        'HI',
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: _totalScore > 2 ? Colors.green : Colors.red),
+                      ),
+                    ),
+                  ),
               ],
             ),
-            Container(
-              width: double.infinity,
-              height: 130.0,
-              margin:
-                  const EdgeInsets.only(bottom: 10.0, left: 30.0, right: 30.0),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Center(
-                child: Text(
-                  _questions[_questioniIndex]['question'] as String,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            ...(_questions[_questioniIndex]['answers']
-                    as List<Map<String, Object>>)
-                .map(
-              (answer) => Answer(
-                answerText: answer['answerText'].toString(),
-                answerColor: answerWasSelected == answer['score']
-                    ? Colors.green
-                    : Colors.red,
-                answerTap: () {
-                  // if answer was already selected then nothing happens onTap
-                  if (answerWasSelected) {
-                    return;
-                  }
-                  //answer is being selected
-                  _questionAnswered(answer['score'] as bool);
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 60.0),
-              ),
-              onPressed: () {
-                if (!answerWasSelected) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                          'Please select the answer before you go to the next question'),
-                    ),
-                  );
-                  return;
-                }
-                _nextQuestion();
-              },
-              child: Text(endOfQuiz ? 'Restart Quiz' : 'Next Question'),
-            ),
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                '${_totalScore.toString()}/${_questions.length}',
-                style: const TextStyle(
-                    fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
-            ),
-            if (answerWasSelected && !endOfQuiz)
-              Container(
-                height: 50,
-                width: double.infinity,
-                color: correctAnswerSelected ? Colors.green : Colors.red,
-                child: Center(
-                  child: Text(
-                    correctAnswerSelected
-                        ? 'You got right, well done'
-                        : 'Wrong answer...',
-                    style: const TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-            if (endOfQuiz)
-              Container(
-                height: 100,
-                width: double.infinity,
-                color: Colors.black,
-                child: Center(
-                  child: Text(
-                    'HI',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: _totalScore > 2 ? Colors.green : Colors.red),
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ]));
   }
 }
 
