@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
-  final String answerText;
+  final String? answerText;
   const Answer(
       {super.key,
-      required this.answerText,
-      required this.answerColor,
-      required this.answerTap});
-  final Color answerColor;
-  final VoidCallback answerTap;
+       this.answerText,
+       this.answerColor,
+       this.answerTap});
+  final Color? answerColor;
+  final VoidCallback? answerTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class Answer extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Text(
-          answerText,
+          answerText.toString(),
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 20.0,

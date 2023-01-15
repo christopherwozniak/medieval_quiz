@@ -108,11 +108,11 @@ class _HomeState extends State<Home> {
                 ...(_questions[_questioniIndex]['answers']
                         as List<Map<String, Object>>)
                     .map(
-                  (answer) => Answer(
+                  (answer) => Answer( 
                     answerText: answer['answerText'].toString(),
-                    answerColor: answerWasSelected == answer['score']
-                        ? Colors.green
-                        : Colors.red,
+                    answerColor: answerWasSelected? answer ['score'] ==true
+                        ? const Color.fromARGB(255, 108, 188, 111)
+                        : const Color.fromARGB(255, 199, 57, 47): null,
                     answerTap: () {
                       // if answer was already selected then nothing happens onTap
                       if (answerWasSelected) {
