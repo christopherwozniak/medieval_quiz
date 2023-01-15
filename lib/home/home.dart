@@ -30,8 +30,8 @@ class _HomeState extends State<Home> {
       // adding to the score tracker on top
       _scoreTracker.add(
         answerScore
-            ? const Icon(Icons.check_circle, color: Colors.green)
-            : const Icon(Icons.clear, color: Colors.red),
+            ? const Icon(Icons.sentiment_satisfied_alt_rounded, color: Colors.green)
+            : const Icon(Icons.sentiment_dissatisfied_sharp, color: Colors.red),
       );
       //when the quiz ends
       if (_questioniIndex + 1 == _questions.length) {
@@ -232,96 +232,3 @@ final _questions = [
   },
 ];
 
-
-// InkWell(
-//               onTap: () {},
-//               child: Container(
-//                 padding: const EdgeInsets.all(15.0),
-//                 margin:
-//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-//                 width: double.infinity,
-//                 decoration: BoxDecoration(
-//                   color: Colors.blue,
-//                   border: Border.all(color: Colors.blue),
-//                   borderRadius: BorderRadius.circular(20.0),
-//                 ),
-//                 child: const Text(
-//                   'Answers',
-//                   textAlign: TextAlign.center,
-//                   style: TextStyle(
-//                     fontSize: 20.0,
-//                     color: Colors.white,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             InkWell(
-//               onTap: () {},
-//               child: Container(
-//                 padding: const EdgeInsets.all(15.0),
-//                 margin:
-//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-//                 width: double.infinity,
-//                 decoration: BoxDecoration(
-//                   color: Colors.blue,
-//                   border: Border.all(color: Colors.blue),
-//                   borderRadius: BorderRadius.circular(20.0),
-//                 ),
-//                 child: const Text(
-//                   'Answers',
-//                   textAlign: TextAlign.center,
-//                   style: TextStyle(
-//                     fontSize: 20.0,
-//                     color: Colors.white,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             InkWell(
-//               onTap: () {},
-//               child: Container(
-//                 padding: const EdgeInsets.all(15.0),
-//                 margin:
-//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-//                 width: double.infinity,
-//                 decoration: BoxDecoration(
-//                   color: Colors.blue,
-//                   border: Border.all(color: Colors.blue),
-//                   borderRadius: BorderRadius.circular(20.0),
-//                 ),
-//                 child: const Text(
-//                   'Answers',
-//                   textAlign: TextAlign.center,
-//                   style: TextStyle(
-//                     fontSize: 20.0,
-//                     color: Colors.white,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             InkWell(
-//               onTap: () {},
-//               child: Container(
-//                 padding: const EdgeInsets.all(15.0),
-//                 margin:
-//                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-//                 width: double.infinity,
-//                 decoration: BoxDecoration(
-//                   color: Colors.blue,
-//                   border: Border.all(color: Colors.blue),
-//                   borderRadius: BorderRadius.circular(20.0),
-//                 ),
-//                 child: const Text(
-//                   'Answers',
-//                   textAlign: TextAlign.center,
-//                   style: TextStyle(
-//                     fontSize: 20.0,
-//                     color: Colors.white,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//               ),
-//             ),
