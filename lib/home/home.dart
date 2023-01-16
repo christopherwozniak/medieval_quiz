@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   bool answerWasSelected = false;
   bool endOfQuiz = false;
   bool correctAnswerSelected = false; 
-  String play= ('');
+  final player= AudioPlayer();
 
   void _questionAnswered(bool answerScore) {
     setState(() {
@@ -108,6 +108,68 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
+                ), Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(onPressed: () { player.play(AssetSource('dance_of_nordic.mp3'),); },
+                    child: Wrap(
+        children: const <Widget>[
+        Icon(
+            Icons.music_note,
+            color: Colors.pink,
+            size: 24.0,
+        ),
+        SizedBox(
+            width:10,
+        ),  Text('Bardzie graj!'),],),
+                )],
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(onPressed: () {
+                      player.stop();
+                    }, child: Wrap(
+        children: const <Widget>[
+        Icon(
+            Icons.music_off,
+            color: Colors.pink,
+            size: 24.0,
+        ),
+        SizedBox(
+            width:10,
+        ), Text('Bardzie zamilcz!'),],),),
+                  ],
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(onPressed: () {
+                      player.pause();
+                    }, child: Wrap(
+        children: const <Widget>[
+        Icon(
+            Icons.pause_presentation,
+            color: Colors.pink,
+            size: 24.0,
+        ),
+        SizedBox(
+            width:10,
+        ),  Text('Bardzie zatrzymaj się na moment!'),],),),
+                  ],
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(onPressed: () {
+                      player.resume();
+                    }, child: Wrap(
+        children: const <Widget>[
+        Icon(
+            Icons.play_arrow,
+            color: Colors.pink,
+            size: 24.0,
+        ),
+        SizedBox(
+            width:10,
+        ),  Text('Bardzie wznów muzykę!'),],),),
+                  ],
                 ),
                 ...(_questions[_questioniIndex]['answers']
                         as List<Map<String, Object>>)
@@ -188,12 +250,12 @@ class _HomeState extends State<Home> {
                             fontWeight: FontWeight.bold,
                             color: _totalScore > 2 ? Colors.green : Colors.red),
                       ),
-                    ),
-                  ),
-              ],
+                    ), 
+                  ), 
+              ], 
             ),
           ), 
-        ]),
+        ], ), 
         );
   }
 }
