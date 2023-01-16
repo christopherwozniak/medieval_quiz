@@ -1,10 +1,13 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:medieval_quiz/answer/answer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
+
+  
 
   @override
   _HomeState createState() => _HomeState();
@@ -16,7 +19,8 @@ class _HomeState extends State<Home> {
   int _totalScore = 0;
   bool answerWasSelected = false;
   bool endOfQuiz = false;
-  bool correctAnswerSelected = false;
+  bool correctAnswerSelected = false; 
+  String play= ('');
 
   void _questionAnswered(bool answerScore) {
     setState(() {
@@ -188,10 +192,13 @@ class _HomeState extends State<Home> {
                   ),
               ],
             ),
-          ),
-        ]));
+          ), 
+        ]),
+        );
   }
 }
+
+
 
 final _questions = [
   {
