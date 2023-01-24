@@ -109,6 +109,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ), Row(mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                   children: [
                     ElevatedButton(onPressed: () { player.play(AssetSource('dance_of_nordic.mp3'),); },
                     child: Wrap(
@@ -117,14 +118,10 @@ class _HomeState extends State<Home> {
             Icons.music_note,
             color: Colors.pink,
             size: 24.0,
-        ),
-        SizedBox(
-            width:10,
-        ),  Text('Bardzie graj!'),],),
-                )],
+        ),],)
+        
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                
                     ElevatedButton(onPressed: () {
                       player.stop();
                     }, child: Wrap(
@@ -133,14 +130,8 @@ class _HomeState extends State<Home> {
             Icons.music_off,
             color: Colors.pink,
             size: 24.0,
-        ),
-        SizedBox(
-            width:10,
-        ), Text('Bardzie zamilcz!'),],),),
-                  ],
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+        ),],),),
+                 
                     ElevatedButton(onPressed: () {
                       player.pause();
                     }, child: Wrap(
@@ -149,14 +140,9 @@ class _HomeState extends State<Home> {
             Icons.pause_presentation,
             color: Colors.pink,
             size: 24.0,
-        ),
-        SizedBox(
-            width:10,
-        ),  Text('Bardzie zatrzymaj się na moment!'),],),),
-                  ],
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+        ),],),),
+                 
+                
                     ElevatedButton(onPressed: () {
                       player.resume();
                     }, child: Wrap(
@@ -165,10 +151,7 @@ class _HomeState extends State<Home> {
             Icons.play_arrow,
             color: Colors.pink,
             size: 24.0,
-        ),
-        SizedBox(
-            width:10,
-        ),  Text('Bardzie wznów muzykę!'),],),),
+        ),],),),
                   ],
                 ),
                 ...(_questions[_questioniIndex]['answers']
