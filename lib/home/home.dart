@@ -111,14 +111,14 @@ class _HomeState extends State<Home> {
                 ), Row(mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                   children: [
-                    ElevatedButton(onPressed: () { player.play(AssetSource('dance_of_nordic.mp3'),); },
+                    ElevatedButton(onPressed: () { final player= AudioPlayer(); player.play(AssetSource('dance_of_nordic.mp3'),); },
                     child: Wrap(
         children: const <Widget>[
         Icon(
             Icons.music_note,
             color: Colors.pink,
             size: 24.0,
-        ),],)
+        ),],),
         
                 ),
                 
