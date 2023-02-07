@@ -1,3 +1,5 @@
+
+
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:audioplayers/audioplayers.dart';
@@ -19,8 +21,16 @@ class _HomeState extends State<Home> {
   int _totalScore = 0;
   bool answerWasSelected = false;
   bool endOfQuiz = false;
-  bool correctAnswerSelected = false; 
-  final player= AudioPlayer();
+  bool correctAnswerSelected = false;
+  
+  get player => AssetSource('dance_of_nordic.mp3');
+  
+  
+  
+  
+  
+ 
+  
 
   void _questionAnswered(bool answerScore) {
     setState(() {
@@ -113,7 +123,7 @@ class _HomeState extends State<Home> {
                   children: [
                     ElevatedButton(onPressed: () { final player= AudioPlayer(); player.play(AssetSource('dance_of_nordic.mp3'),); },
                     child: Wrap(
-        children: const <Widget>[
+        children: const[
         Icon(
             Icons.music_note,
             color: Colors.pink,
@@ -123,9 +133,9 @@ class _HomeState extends State<Home> {
                 ),
                 
                     ElevatedButton(onPressed: () {
-                      player.stop();
+                      player.stop(AssetSource('dance_of_nordic.mp3'),);
                     }, child: Wrap(
-        children: const <Widget>[
+        children: const [
         Icon(
             Icons.music_off,
             color: Colors.pink,
@@ -133,9 +143,9 @@ class _HomeState extends State<Home> {
         ),],),),
                  
                     ElevatedButton(onPressed: () {
-                      player.pause();
+                      player.pause(AssetSource('dance_of_nordic.mp3'),);
                     }, child: Wrap(
-        children: const <Widget>[
+        children: const [
         Icon(
             Icons.pause_presentation,
             color: Colors.pink,
@@ -144,9 +154,9 @@ class _HomeState extends State<Home> {
                  
                 
                     ElevatedButton(onPressed: () {
-                      player.resume();
+                      player.resume(AssetSource('dance_of_nordic.mp3'),);
                     }, child: Wrap(
-        children: const <Widget>[
+        children: const [
         Icon(
             Icons.play_arrow,
             color: Colors.pink,
